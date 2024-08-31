@@ -1,10 +1,25 @@
 <template>
-  <div>loh</div>
-  <p>{{ count }}</p>
-  <SomeComp />
-  <SomeComp />
+  <div class="nav">
+    <NuxtLink active-class="active" to="/">home</NuxtLink>
+    <NuxtLink active-class="active" to="/profile">profile</NuxtLink>
+    <NuxtLink active-class="active" to="/login">login</NuxtLink>
+  </div>
+  <NuxtPage />
 </template>
 
-<script setup lang="ts">
-const count = ref(1); // ref is auto-imported
-</script>
+<style scoped>
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  gap: 5px;
+  color: inherit;
+}
+
+.active {
+  color: green;
+}
+</style>
