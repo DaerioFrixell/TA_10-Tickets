@@ -1,17 +1,21 @@
 <template>
-  <form action="">
+  <form>
     <label>
       Логин
       <input v-model="user.login" type="text" />
     </label>
 
-    <!-- скрыть/показать добавить -->
     <label>
       Пароль
-      <input v-model="user.password" type="password" autocomplete="on" />
+      <input :type="inputType" v-model="user.password" autocomplete="on" />
+      <button @click.prevent="handlerViewPassword">
+        <span v-if="showPassword">показать</span>
+        <span v-else>скрыть</span>
+        пароль
+      </button>
     </label>
 
-    <button @click.prevent="toLogin">Log in</button>
+    <button @click.prevent="toLogin">Войти</button>
   </form>
 </template>
 
@@ -24,15 +28,24 @@ definePageMeta({
 
 const { authenticateUser } = useAuthStore();
 const { authenticated } = storeToRefs(useAuthStore());
-const router = useRouter();
-
-console.log("au:", authenticated.value);
 
 const user = ref({ login: "", password: "" });
+const inputType = ref("password");
+const showPassword = ref(false);
+
 const toLogin = async () => {
   await authenticateUser(user.value);
   if (authenticated.value) {
     navigateTo("/");
+  }
+};
+const handlerViewPassword = () => {
+  if (inputType.value === "password") {
+    inputType.value = "text";
+    showPassword.value = true;
+  } else {
+    inputType.value = "password";
+    showPassword.value = false;
   }
 };
 </script>
