@@ -1,29 +1,20 @@
 import { defineStore } from 'pinia';
 
 interface UserPayloadInterface {
-  username: string;
+  login: string;
   password: string;
 }
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     authenticated: false,
-    loading: false,
   }),
   actions: {
-    async authenticateUser({ username, password }: UserPayloadInterface) {
-      const { data, pending }: any = await useFetch('https://dummyjson.com/auth/login', {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: {
-          username,
-          password,
-        },
-      });
-      this.loading = pending;
-      if (data.value) {
+    async authenticateUser({ login, password }: UserPayloadInterface) {
+      if (login === "admin" && password === "admin") {
         const token = useCookie('token');
-        token.value = data?.value?.token;
+        token.value = 'access';
         this.authenticated = true;
+        console.log('thi:', this.authenticated)
       }
     },
     logUserOut() {

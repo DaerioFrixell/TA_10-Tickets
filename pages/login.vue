@@ -1,33 +1,37 @@
 <template>
   <form action="">
     <label>
-      Login
-      <input v-model="login" type="text" />
+      Логин
+      <input v-model="user.login" type="text" />
     </label>
 
     <!-- скрыть/показать добавить -->
     <label>
-      Password <input v-model="password" type="password" autocomplete="on" />
+      Пароль
+      <input v-model="user.password" type="password" autocomplete="on" />
     </label>
 
-    <button @click.prevent="toLogin({ login, password })">Log in</button>
+    <button @click.prevent="toLogin">Log in</button>
   </form>
 </template>
 
 <script setup lang="ts">
-import { useLocalStorage } from "@vueuse/core";
+import { storeToRefs } from "pinia";
+import { useAuthStore } from "~/store/auth";
+definePageMeta({
+  middleware: ["auth"],
+});
 
-type toLoginProps = {
-  login: string;
-  password: string;
-};
+const { authenticateUser } = useAuthStore();
+const { authenticated } = storeToRefs(useAuthStore());
+const router = useRouter();
 
-const login = defineModel("login", { type: String, default: "" });
-const password = defineModel("password", { type: String, default: "" });
+console.log("au:", authenticated.value);
 
-const toLogin = ({ login, password }: toLoginProps) => {
-  if (login === "admin" && password === "admin") {
-    useLocalStorage("token", "access");
+const user = ref({ login: "", password: "" });
+const toLogin = async () => {
+  await authenticateUser(user.value);
+  if (authenticated.value) {
     navigateTo("/");
   }
 };
