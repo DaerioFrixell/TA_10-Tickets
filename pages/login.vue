@@ -9,8 +9,8 @@
       Пароль
       <input :type="inputType" v-model="user.password" autocomplete="on" />
       <button @click.prevent="handlerViewPassword">
-        <span v-if="showPassword">показать</span>
-        <span v-else>скрыть</span>
+        <span v-if="showPassword">скрыть</span>
+        <span v-else>показать</span>
         пароль
       </button>
     </label>
