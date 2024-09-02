@@ -2,17 +2,13 @@
 import { useStorage } from "@vueuse/core";
 
 const profileInitState = {
-  name: "initName",
-  surname: "initSurname",
-  info: "initInfo",
+  name: "init",
+  surname: "init",
+  info: "init",
   birth: "2000-01-01",
-  city: "initCity",
+  city: "init",
 };
-
 const state = useStorage("vue-use-local-storage", profileInitState);
-const props = defineProps({
-  name: String,
-});
 
 const isEdit = useIsEdit();
 </script>
@@ -26,10 +22,10 @@ const isEdit = useIsEdit();
         :name-props="'информация о пользователе'"
         :value-props="state.info"
       />
-      <ProfileViewField :name-props="'город'" :value-props="'city'" />
+      <ProfileViewField :name-props="'город'" :value-props="state.city" />
       <ProfileViewField
         :name-props="'дата рождения'"
-        :value-props="'2015-05-05'"
+        :value-props="state.birth"
       />
       <button @click="isEdit = true">edit</button>
     </div>

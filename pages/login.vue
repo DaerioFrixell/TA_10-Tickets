@@ -1,17 +1,34 @@
 <template>
-  <form method="POST" action="login">
+  <form action="">
     <label>
       Login
-      <input name="login" type="text" />
+      <input v-model="login" type="text" />
     </label>
 
     <!-- скрыть/показать добавить -->
     <label>
-      Password
-      <input name="password" type="password" />
+      Password <input v-model="password" type="password" autocomplete="on" />
     </label>
 
-    <button>Log in</button>
-    asd
+    <button @click.prevent="toLogin({ login, password })">Log in</button>
   </form>
 </template>
+
+<script setup lang="ts">
+import { useLocalStorage } from "@vueuse/core";
+
+type toLoginProps = {
+  login: string;
+  password: string;
+};
+
+const login = defineModel("login", { type: String, default: "" });
+const password = defineModel("password", { type: String, default: "" });
+
+const toLogin = ({ login, password }: toLoginProps) => {
+  if (login === "admin" && password === "admin") {
+    useLocalStorage("token", "access");
+    navigateTo("/");
+  }
+};
+</script>

@@ -7,6 +7,13 @@
   <NuxtPage />
 </template>
 
+<script setup lang="ts">
+import { useLocalStorage } from "@vueuse/core";
+
+const token = useLocalStorage("token", "qwe");
+console.log("tok: ", token.value);
+</script>
+
 <style scoped>
 a {
   color: inherit;
