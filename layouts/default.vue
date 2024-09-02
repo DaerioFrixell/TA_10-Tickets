@@ -4,6 +4,7 @@
       <div class="nav">
         <NuxtLink active-class="active" to="/">home</NuxtLink>
         <NuxtLink active-class="active" to="/profile">profile</NuxtLink>
+
         <div v-if="authenticated" class="loginBtn" style="float: right">
           <NuxtLink active-class="active" @click="logout">Logout</NuxtLink>
         </div>

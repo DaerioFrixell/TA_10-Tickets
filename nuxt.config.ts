@@ -6,4 +6,8 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@pinia/nuxt',
   ],
+  css: [
+    // SCSS file in the project
+    "~/assets/style/main.scss", // you should add main.scss somewhere in your app
+  ],
 })

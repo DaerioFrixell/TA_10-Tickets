@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>Index page</h1>
-    asd
+    <div class="asd">Index page</div>
   </div>
 </template>
 
@@ -10,3 +9,5 @@ definePageMeta({
   middleware: ["auth"],
 });
 </script>
+
+<style lang="scss"></style>
