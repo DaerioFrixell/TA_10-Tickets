@@ -9,7 +9,7 @@ export const useAuthStore = defineStore('auth', {
     authenticated: false,
   }),
   actions: {
-    async authenticateUser({ login, password }: UserPayloadInterface) {
+    authenticateUser({ login, password }: UserPayloadInterface) {
       if (login === "admin" && password === "admin") {
         const token = useCookie('token');
         token.value = 'access';

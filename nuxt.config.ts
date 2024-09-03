@@ -7,7 +7,11 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
   ],
   css: [
-    // SCSS file in the project
-    "~/assets/style/main.scss", // you should add main.scss somewhere in your app
+    "~/assets/style/main.scss",
   ],
+  routeRules: {
+    '/': { ssr: true },
+    '/profile': { swr: 60 },
+    '/login': { swr: 60 },
+  },
 })
