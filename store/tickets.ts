@@ -12,15 +12,15 @@ export const useTicketsStore = defineStore('tickets', {
     tickets: [
       {
         id: '1',
-        checked: false,
-        text: 'ticket text',
-        date: '2000-01-01',
+        checked: true,
+        text: 'ticket is done',
+        date: '10.01.20',
       },
       {
         id: '12',
         checked: false,
-        text: 'ticket text2',
-        date: '2000-01-01',
+        text: 'ticket not done',
+        date: '10.01.20',
       },
     ],
   }),
@@ -35,16 +35,11 @@ export const useTicketsStore = defineStore('tickets', {
     },
     checkedHandler(id: string) {
       this.tickets.map(ticket => {
-        if (ticket.id === id) {
-          ticket.checked = !ticket.checked
-        }
+        if (ticket.id === id) ticket.checked = !ticket.checked
       })
     },
     removeTickets(id: string) {
-      const newTickets = this.tickets.filter(ticket => {
-        return ticket.id !== id
-      });
-
+      const newTickets = this.tickets.filter(ticket => ticket.id !== id);
       return this.tickets = newTickets;
     },
     toLocal() {

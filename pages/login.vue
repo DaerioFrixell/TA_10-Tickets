@@ -2,7 +2,7 @@
   <form class="form">
     <label class="form__field">
       Логин
-      <input v-model="user.login" type="text" />
+      <input class="form__field__input" v-model="user.login" type="text" />
     </label>
 
     <label class="form__field">
@@ -11,7 +11,12 @@
         <HidePass v-if="showPassword" @click.prevent="handlerViewPassword" />
         <ViewPass v-else @click.prevent="handlerViewPassword" />
       </div>
-      <input :type="inputType" v-model="user.password" autocomplete="on" />
+      <input
+        class="form__field__input"
+        :type="inputType"
+        v-model="user.password"
+        autocomplete="on"
+      />
     </label>
     <div class="login">
       <button class="login__btn" @click.prevent="toLogin">Войти</button>
@@ -66,6 +71,10 @@ const handlerViewPassword = () => {
     flex-direction: column;
     gap: 10px;
     justify-content: space-between;
+
+    &__input {
+      padding: 4px;
+    }
 
     &__pass {
       display: flex;
